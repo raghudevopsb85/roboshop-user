@@ -1,0 +1,57 @@
+name: CICD - Main
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+  test:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+  dev-deploy:
+    runs-on: self-hosted
+    needs: test
+    environment: dev
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+  qa-deploy:
+    runs-on: self-hosted
+    needs: dev-deploy
+    environment: qa
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+  uat-deploy:
+    runs-on: self-hosted
+    needs: qa-deploy
+    environment: uat
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+  prod-deploy:
+    runs-on: self-hosted
+    needs: uat-deploy
+    environment: prod
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run a one-line script
+        run: echo Hello, world!
