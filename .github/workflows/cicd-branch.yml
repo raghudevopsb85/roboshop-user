@@ -3,18 +3,10 @@ on:
   push:
     branches-ignore:
       - 'main'
-jobs:
-  build:
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run a one-line script
-        run: echo Hello, world!
 
-  test:
-    runs-on: self-hosted
-    needs: build
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run a one-line script
-        run: echo Hello, world!
+  workflow_dispatch:
+jobs:
+  reuse:
+    uses: raghudevopsb85/roboshop-github-actions/.github/workflows/ci-branch.yml@main
+
+
